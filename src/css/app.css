@@ -1,35 +1,3 @@
-<template>
-  <div id="q-app">
-    <router-view />
-  </div>
-</template>
-<script>
-export default {
-  name: 'App',
-  data () {
-    return {
-    }
-  },
-  mounted () {
-    this.$store.commit('window/updateWindowWidth', window.innerWidth)
-    this.$store.commit('window/updateWindowHeight', window.innerHeight)
-    this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize)
-    })
-  },
-  beforeDestroy () {
-    window.removeEventListener('resize', this.onResize)
-  },
-  methods: {
-    onResize () {
-      this.$store.commit('window/updateWindowWidth', window.innerWidth)
-      this.$store.commit('window/updateWindowHeight', window.innerHeight)
-    }
-  }
-}
-</script>
-
-<style>
 body::-webkit-scrollbar {
   width: 0px;
 }
@@ -51,7 +19,7 @@ body::-webkit-scrollbar {
 }
 
 .footer-logo {
-  height: 30px;
+  height: 60px;
 }
 
 .rotate180 {
@@ -408,5 +376,3 @@ body::-webkit-scrollbar {
   .underline {
     text-decoration: underline;
   } */
-
-</style>

@@ -1,13 +1,9 @@
 export default function () {
   return {
-    // lightThemeBGColor: '#FFFFFF',
-    // lightThemeColor: '#242424',
-    // darkThemeBGColor: '#242424',
-    // darkThemeColor: '#FFFFFF',
-    lightThemeBGColor: '#FFFFFF00',
-    lightThemeColor: '#242424',
-    darkThemeBGColor: '#24242400',
-    darkThemeColor: '#FFFFFF',
+    lightThemeBGColor: '#f6f6f6',
+    lightThemeColor: '#000000',
+    darkThemeBGColor: '#000000',
+    darkThemeColor: '#f6f6f6', // E0EFF1
     themeBGColor: '',
     themeColor: ''
   }

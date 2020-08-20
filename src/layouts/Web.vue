@@ -1,386 +1,231 @@
 <template>
-  <div
-  >
-  <!-- tabindex="-1"
-    @keydown.meta.187.capture.prevent.stop @keydown.meta.107.capture.prevent.stop
-    @keydown.meta.189.capture.prevent.stop @keydown.meta.109.capture.prevent.stop
-    @keydown.ctrl.187.capture.prevent.stop @keydown.ctrl.107.capture.prevent.stop
-    @keydown.ctrl.189.capture.prevent.stop @keydown.ctrl.109.capture.prevent.stop -->
+<div>
     <q-layout
-      view="lHr LpR lfr"
-      reveal
-      :style="'background-color: ' + $store.state.colors.themeBGColor + '; color: ' + $store.state.colors.themeColor"
+      view="lHr LpR fff"
+      style="background-image: linear-gradient(to bottom right, white, black);"
     >
-      <!-- :style="$q.dark.isActive ? 'background-image: linear-gradient(to bottom right, #512fa9, black); color: ' + darkThemeColor
-        : 'background-image: linear-gradient(to bottom right, #512fa9, white); color: ' + lightThemeColor" -->
+      <!-- :style="'background-color: ' + $store.state.colors.themeBGColor + '; color: ' + $store.state.colors.themeColor" -->
+        <!-- class="transparent" -->
       <q-header
+      reveal
         :style="$store.state.colors.themeBGColor != '' ?
           'background-color: ' + $store.state.colors.themeBGColor + '; color: ' + $store.state.colors.themeColor
           : $q.dark.isActive ? 'background-color: ' + $store.state.colors.darkThemeBGColor + '; color: ' + $store.state.colors.darkThemeColor
             : 'background-color: ' + $store.state.colors.lightThemeBGColor + '; color: ' + $store.state.colors.lightThemeColor"
       >
-        <div class="row no-wrap justify-center">
-          <q-btn
-            v-if="$store.state.window.windowWidth >= 500"
+        <q-toolbar
+        v-if="!headerTransitionVal"
+          class="column q-pa-none"
+          :class="headerTransition ? 'shadow-4' : ''"
+        >
+          <!-- :style="$q.dark.isActive ?
+            'background-color: ' + darkThemeBGColor + '; color: ' + darkThemeColor
+            : 'background-color: ' + lightThemeBGColor + '; color: ' + lightThemeColor" -->
+        <div class="fit row wrap justify-end items-start content-start">
+          <!-- <q-btn
             @click="left = !left"
             dense
             flat
-            :color="$q.dark.isActive ? 'white': 'black'"
-            class="q-pa-none q-ma-sm"
+            icon="menu"
+            class="q-ml-xl q-mt-xl"
+          /> -->
+          <q-space v-if="$store.state.window.windowWidth <= 560"/>
+          <div
+            @click="$q.dark.toggle()"
+            flat
+            dense
+            class="q-px-xl q-pt-xl"
           >
-            <q-icon :color="$q.dark.isActive ? 'white' : 'black'" :name="left ? 'mdi-menu-open' : 'mdi-backburger'"
-              :style="left ? '' : 'transform: rotate(180deg);' "/>
-            </q-btn>
-            <q-space/>
-          <div class="justify-center">
-            <q-tabs class="row justify-center" no-caps
-            >
-              <div @click="tab = 'home', $store.commit('colors/updateThemeBGColor', '#99CDFF')" class="col">
-                <q-route-tab label="Início" to="/"/>
-              </div>
-              <div @click="tab = 'about', $store.commit('colors/updateThemeBGColor', '#2E2E2E')" class="col">
-                <q-route-tab label="Sobre" to="/about"/>
-              </div>
-                <q-btn @click="mainArea == false ? (toggleZoomScreen(), mainArea = !mainArea, $store.commit('colors/updateThemeBGColor', '#FFFA81'))
-                  : tab == 'yourprojects' ? mainArea = !mainArea : tab = 'yourprojects', toggleZoomScreen(), $store.commit('colors/updateThemeBGColor', '#FFFA81')" size="18.5px" flat
-                  style="border-top-left-radius: 0px;
-                    border-top-right-radius: 0px;
-                    border-bottom-left-radius: 0px;
-                    border-bottom-right-radius: 0px;"
-                >
-                  <img class="img-logo" :src="$q.dark.isActive ? require('../assets/your-trans-11.png') : require('../assets/your-trans-10.png')">
-                </q-btn>
-              <div @click="tab = 'services', $store.commit('colors/updateThemeBGColor', '#E0EFF1')" class="col">
-                <q-route-tab label="Servicos" to="/services"/>
-              </div>
-              <div @click="tab = 'doubts', $store.commit('colors/updateThemeBGColor', '#E0EFF1')" class="col">
-                <q-route-tab label="Dúvidas" to="/doubts"/>
-              </div>
-            </q-tabs>
+            <img class="footer-logo" :src="$q.dark.isActive ? require('../assets/logo/your-design-trans-white.png') : require('../assets/logo/your-design-trans.png')">
           </div>
-            <q-space/>
-            <q-btn
-            v-if="$store.state.window.windowWidth >= 500"
+          <q-space/>
+          <!-- <q-btn
+            @click="right = !right"
+            dense
+
+            flat
+            icon="menu"
+            class="q-mr-xl q-mt-xl"
+          /> -->
+          </div>
+        <div class="fit row wrap justify-end items-start content-start">
+          <q-space />
+          <q-tabs :class="$store.state.window.windowWidth <= 560 ? '' : 'q-mr-xl'">
+            <div @click="headerTab">
+              <q-route-tab name="home" label="Início" to="/" class="q-pa-sm q-mt-xl"/>
+            </div>
+            <div @click="headerTab">
+              <q-route-tab name="about" label="Sobre" to="/about" class="q-pa-sm q-mt-xl"/>
+            </div>
+            <div @click="headerTab">
+              <q-route-tab name="services" label="Serviços" to="/services" class="q-pa-sm q-mt-xl"/>
+            </div>
+            <div @click="headerTab">
+              <q-route-tab name="doubts" label="Dúvidas" to="/doubts" class="q-pa-sm q-mt-xl"/>
+            </div>
+          </q-tabs>
+          <q-space v-if="$store.state.window.windowWidth <= 560"/>
+        </div>
+        </q-toolbar>
+        <q-toolbar
+          v-if="headerTransitionVal2"
+          class="column"
+          :class="headerTransition ? 'shadow-4' : ''"
+          :style="$q.dark.isActive ?
+            'background-color: ' + darkThemeBGColor + '; color: ' + darkThemeColor
+            : 'background-color: ' + lightThemeBGColor + '; color: ' + lightThemeColor"
+        >
+        <div class="fit row wrap justify-end items-start content-start">
+          <q-btn
+            @click="left = !left"
+            dense
+            flat
+            icon="menu"
+            class="q-mt-sm"
+          />
+          <div
+            @click="$q.dark.toggle()"
+            flat
+            dense
+            class="q-pt-sm q-pl-sm"
+          >
+            <img class="footer-logo" :src="$q.dark.isActive ? require('../assets/logo/your-design-trans-white.png') : require('../assets/logo/your-design-trans.png')">
+          </div>
+          <q-space/>
+          <q-btn
+            v-if="$store.state.window.windowWidth <= 560"
             @click="right = !right"
             dense
             flat
-            :color="$q.dark.isActive ? 'white': 'black'"
-            class="q-pa-none q-ma-sm"
-          >
-            <q-icon :color="$q.dark.isActive ? 'white' : 'black'" :name="right ? 'mdi-menu-open' : 'mdi-backburger'"
-              :style="right ? 'transform: rotate(180deg);' : '' "/>
-            </q-btn>
-        </div>
+            icon="menu"
+            class="q-mt-sm q-ml-md"
+          />
+          <q-tabs class="q-ma-none">
+            <div @click="headerTab">
+              <q-route-tab name="home" label="Início" to="/" />
+            </div>
+            <div @click="headerTab">
+              <q-route-tab name="about" label="Sobre" to="/about" />
+            </div>
+            <div @click="headerTab">
+              <q-route-tab name="services" label="Serviços" to="/services" />
+            </div>
+            <div @click="headerTab">
+              <q-route-tab name="doubts" label="Dúvidas" to="/doubts" />
+            </div>
+          </q-tabs>
+          <q-btn
+            v-if="$store.state.window.windowWidth > 560"
+            @click="right = !right"
+            dense
+            flat
+            icon="menu"
+            class="q-mt-sm q-ml-md"
+          />
+          </div>
+        </q-toolbar>
+      <q-separator inset />
       </q-header>
-      <!-- <WallE/> -->
       <q-drawer flat content-class="" bordered :width="250" v-model="left" side="left">
+         <!-- <q-color no-header default-view="palette" :palette="palette" v-model="lightThemeBGColor" />
+         <q-color no-header default-view="palette" :palette="palette" v-model="lightThemeColor" />
+         <q-color no-header default-view="palette" :palette="palette" v-model="darkThemeBGColor" />
+         <q-color no-header default-view="palette" :palette="palette" v-model="darkThemeColor" /> -->
         <LeftDrawer />
       </q-drawer>
       <q-drawer content-class="" bordered mini :width="65" v-model="right" side="right">
         <RightDrawer />
       </q-drawer>
       <q-page-container>
-        <transition name="bounce">
-          <div v-if="mainArea">
-            <div
-              class="row wrap text-center justify-center items-start content-center"
-            >
-              <div class="fit row wrap justify-center items-start">
-                <q-tab-panels
-                  v-model="tab"
-                  animated
-                  style="background-color: #12121200;"
-                >
-                  <q-tab-panel style="min-width: 390px;" class="q-pa-md" name="home">
-                    <b>Seja bem vindo ao <strong class="text-orange">yourprojects.net</strong></b>
-                    <div><b class="text-orange">Fazendo com que o amanhã se torne o hoje!</b></div>
-                  </q-tab-panel>
-                  <q-tab-panel style="min-width: 390px;" class="q-pa-md" name="about">
-                    <b>Criado por <strong class="text-orange">Kevin Kobori</strong></b>
-                    <div><b>Facilitando para o <strong class="text-orange">empregado</strong> e o <strong class="text-orange">empregador</strong></b></div>
-                  </q-tab-panel>
-                  <q-tab-panel style="min-width: 390px;" class="q-pa-sm" name="yourprojects">
-                    <q-tabs
-                      dense
-                      no-caps
-                      v-model="ecoSystem"
-                    >
-                      <div class="col">
-                        <q-tab
-                        class="q-ma-none q-pa-none"
-                          @click="ecoSystem = 'web'"
-                          name="web"
-                          icon="mdi-web"
-                          label="Web"
-                        />
-                      </div>
-                      <div class="col">
-                        <q-tab
-                        class="q-ma-none q-pa-none"
-                          @click="ecoSystem = 'android'"
-                          name="android"
-                          icon="mdi-android"
-                          label="Android"
-                        />
-                      </div>
-                      <div class="col">
-                        <q-tab
-                        class="q-ma-none q-pa-none"
-                          @click="ecoSystem = 'ios'"
-                          name="ios"
-                          icon="mdi-cellphone-iphone"
-                          label="iPhone"
-                        />
-                      </div>
-                      <div class="col">
-                        <q-tab
-                        class="q-ma-none q-pa-none"
-                          @click="ecoSystem = 'windows'"
-                          name="windows"
-                          icon="mdi-microsoft"
-                          label="Windows"
-                        />
-                      </div>
-                      <div class="col">
-                        <q-tab
-                        class="q-ma-none q-pa-none"
-                          @click="ecoSystem = 'mac'"
-                          name="mac"
-                          icon="mdi-apple"
-                          label="Mac"
-                        />
-                      </div>
-                    </q-tabs>
-                  </q-tab-panel>
-                  <q-tab-panel style="min-width: 390px;" class="q-pa-md" name="services">
-                    <b>Responsáveis pelo desenvolvimento do <strong class="text-orange">Seu APP/Site</strong></b>
-                    <div><b class="text-orange">...É um desenvolvedor Web?</b><b> Insira o seu portifólio <strong><a href="" class="text-orange">Aqui!</a></strong></b></div>
-                  </q-tab-panel>
-                  <q-tab-panel style="min-width: 390px;" class="q-pa-md" name="doubts">
-                    <b>Do </b><b>design </b><b>a configuração dos servidores de <strong class="text-orange">sua Aplicação</strong></b>
-                    <div><b>Trabalhamos com <strong class="text-orange">Frontend, Backend, Banco de Dados...</strong></b></div>
-                  </q-tab-panel>
-                </q-tab-panels>
-              </div>
-            </div>
-            <q-tab-panels
-              v-model="ecoSystem"
-              animated
-              style="background-color: #12121200;"
-            >
-              <q-tab-panel
-                class="q-pa-none"
-                name="web"
-              >
-                <div id="web-preview" class="platform-web mat-only">
-                  <br>
-                  <div class="row">
-                    <div class="col-1" />
-                    <div class="col-10">
-                      <q-bar dense>
-                        <img class="img-mini-logo" :src="$q.dark.isActive ? require('../assets/your-trans-11.png') : require('../assets/your-trans-10.png')">
-                        <q-space />
-                        <q-btn dense flat icon="minimize" @click="mainArea = !mainArea" />
-                        <q-btn @click="$q.fullscreen.isActive ? '' : $q.fullscreen.toggle(), dialog = true" dense flat icon="crop_square" />
-                        <q-btn dense flat icon="close" @click="mainArea = !mainArea" />
-                      </q-bar>
-                      <div class="q-pa-xs">
-                        <q-input dense disable outlined color="deep-purple-8" v-model="frameWebSite" label-slot clearable>
-                          <template v-slot:prepend>
-                            <q-icon size="xs" name="mdi-lock" />
-                          </template>
-                          <template v-slot:label>
-                            <strong class="text-deep-orange">Your Projects</strong>
-                            <strong> always with you</strong>
-                          </template>
-                        </q-input>
-                        <q-dialog
-                          v-model="dialog"
-                          persistent
-                          :maximized="maximizedToggle"
-                          transition-show="slide-up"
-                          transition-hide="slide-down"
-                        >
-                          <div class="bg-deep-purple-9">
-                            <q-bar dense>
-                              <q-space />
-                              <q-btn dense flat icon="minimize" v-close-popup>
-                                <q-tooltip v-if="maximizedToggle" content-class="bg-white text-primary">Minimize</q-tooltip>
-                              </q-btn>
-                              <q-btn dense flat icon="crop_square" :disable="maximizedToggle">
-                              </q-btn>
-                              <q-btn @click="$q.fullscreen.isActive ? $q.fullscreen.toggle() : '', mainArea = !mainArea" dense flat icon="close" v-close-popup>
-                                <q-tooltip content-class="bg-white text-primary">Close</q-tooltip>
-                              </q-btn>
-                            </q-bar>
-                            <div id="web-fullscreen-preview" class="platform-web mat-only">
-                            <iframe id="web-fullscreen-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/>
-                            </div>
-                          </div>
-                        </q-dialog>
-                      </div>
-                    </div>
-                    <div class="col-1" />
-                  </div>
-                  <iframe id="web-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/>
-                </div>
-              </q-tab-panel>
-              <q-tab-panel class="q-pa-none" name="android">
-                <div id="android-preview" class="platform-android mat-only">
-                  <iframe id="android-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/>
-                </div>
-              </q-tab-panel>
-
-              <q-tab-panel class="q-pa-none" name="ios">
-                <div id="ios-preview" class="platform-ios mat-only">
-                  <iframe id="ios-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/>
-                </div>
-              </q-tab-panel>
-
-              <q-tab-panel class="q-pa-none" name="windows">
-                <div id="windows-preview" class="platform-windows mat-only">
-                  <iframe id="windows-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath" />
-                </div>
-              </q-tab-panel>
-              <q-tab-panel class="q-pa-none" name="mac">
-                <div id="mac-preview" class="platform-mac mat-only">
-                  <iframe id="mac-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/>
-                </div>
-              </q-tab-panel>
-            </q-tab-panels>
+        <!-- {{ tabVal }} -->
+        <!-- <FadeTransition/> -->
+        <!-- <div v-if="this.$route.fullPath != '/'"
+          class="q-px-xl fit row wrap justify-center items-start content-center"
+          :class="this.$route.fullPath.search(/\bios\b/) >= 0 ? '' : ''"
+        >
+          <div
+            class="q-pt-xs col-auto text-center">
+            <q-tabs dense
+              class="" no-caps>
+              <q-tab
+                icon="mdi-web"
+                label="Web"
+                @click="dynamicRoute('')"
+              />
+              <q-tab
+                icon="mdi-apple-ios"
+                label="iPhone"
+                @click="dynamicRoute('/ios')"
+              />
+              <q-tab
+                icon="mdi-google-play"
+                label="Android" @click="dynamicRoute('/android')"
+              />
+              <q-tab
+                icon="mdi-apple"
+                label="Mac"
+                @click="dynamicRoute('/mac')"
+              />
+              <q-tab
+                icon="mdi-microsoft"
+                label="Windows"
+                @click="dynamicRoute('/windows')"
+              />
+            </q-tabs>
           </div>
-        </transition>
-        <div v-if="!mainArea">
-          <!-- <div v-if="tab == 'home'">
-            <transition name="fade">
-              <router-view />
-            </transition>
-          </div> -->
-          <!-- <div v-else-if="tab == 'about'">
-            <transition
-              name="custom-classes-transition"
-              enter-active-class="animated tada"
-              leave-active-class="animated bounceOutRight"
-            >
-              <router-view />
-            </transition>
-          </div> -->
-          <div>
-            <transition name="slide-fade" mode="out-in">
-              <router-view />
-            </transition>
-          </div>
-          <!-- <div v-else>
-            <transition name="bounce">
-              <router-view />
-            </transition>
-          </div> -->
-          <!-- <div v-else>
-            <transition
-              v-on:before-enter="beforeEnter"
-              v-on:enter="enter"
-              v-on:leave="leave"
-              v-bind:css="false"
-            >
-              <router-view />
-            </transition>
-          </div> -->
         </div>
-        <DynamicWhatsapp />
-        <DynamicThemeChange />
-            <q-page-sticky position="top-right" :offset="$store.state.window.windowWidth <= 500 ? [12, 60] : [12, 12]">
-      <q-btn
-            @click="$q.fullscreen.toggle()"
-            flat
-            padding="none" style="border-top-left-radius: 0px; border-top-right-radius: 0px;
-            border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;"
-            :style="'backgroud-color: ' + $q.dark.isActive ? 'white' : 'black'"
-          >
-            <q-icon :color="$q.dark.isActive ? 'white' : 'black'" :name="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"/>
-          </q-btn>
-    </q-page-sticky>
-        <q-page-sticky position="top-right" :offset="$store.state.window.windowWidth <= 500 ? [14, 108] : [14, 60]">
-      <q-btn
-            @click="$q.dark.toggle()"
-            flat
-            padding="none"
-            class="q-pa-none q-ma-none"
-            style="border-top-left-radius: 0px; border-top-right-radius: 0px;
-            border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;"
-            :style="'backgroud-color: ' + $q.dark.isActive ? 'white' : 'black'"
-          >
-            <q-icon size="20px" :color="$q.dark.isActive ? 'white' : 'black'" name="mdi-compare"/>
-          </q-btn>
-    </q-page-sticky>
-        <q-page-sticky position="top-right" :offset="$store.state.window.windowWidth <= 500 ? [12, 60] : [12, 12]">
-      <q-btn
-            @click="$q.fullscreen.toggle()"
-            flat
-            padding="none" style="border-top-left-radius: 0px; border-top-right-radius: 0px;
-            border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;"
-            :style="'backgroud-color: ' + $q.dark.isActive ? 'white' : 'black'"
-          >
-            <q-icon :color="$q.dark.isActive ? 'white' : 'black'" :name="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"/>
-          </q-btn>
-    </q-page-sticky>
-         <q-page-sticky
-          position="top-left" :offset="[12, 12]">
-          <q-btn
-            v-if="$store.state.window.windowWidth <= 500"
-            @click="left = !left"
-            dense
-            flat
-            padding="none"
-            :color="$q.dark.isActive ? 'white': 'black'"
-            class="q-pa-none"
-          ><q-icon :color="$q.dark.isActive ? 'white' : 'black'" :name="left ? 'mdi-menu-open' : 'mdi-backburger'"
-              :style="left ? '' : 'transform: rotate(180deg);' "/>
-              </q-btn>
-        </q-page-sticky>
-         <q-page-sticky
-          position="top-right" :offset="[12, 12]">
-           <q-btn
-            v-if="$store.state.window.windowWidth <= 500"
-            @click="right = !right"
-            dense
-            flat
-            padding="none"
-            :color="$q.dark.isActive ? 'white': 'black'"
-            class="q-pa-none"
-          >
-            <q-icon :color="$q.dark.isActive ? 'white' : 'black'" :name="right ? 'mdi-menu-open' : 'mdi-backburger'"
-              :style="right ? 'transform: rotate(180deg);' : '' "/>
-            </q-btn>
-        </q-page-sticky>
-        <q-page-sticky
-          position="top-left" :offset="$store.state.window.windowWidth <= 500 ? [12, 60] : [12, 12]">
-          <q-btn
-            @click="mainArea = !mainArea, toggleZoomScreen()"
-            flat
-            padding="none" style="border-top-left-radius: 0px; border-top-right-radius: 0px;
-            border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;"
-            :style="'backgroud-color: ' + $q.dark.isActive ? 'white' : 'black'"
-          >
-            <q-icon :color="$q.dark.isActive ? 'white' : 'black'" :name="mainArea ? 'close' : 'mdi-tablet-cellphone'"/>
-          </q-btn>
-        </q-page-sticky>
-        <!-- <WallE/> -->
-      </q-page-container>
-      <!-- <q-footer
-        v-if="!mainArea"
-        container
-        elevated
-        style="height: 250px"
-        :style="$store.state.colors.themeBGColor != '' ?
-          'background-color: ' + $store.state.colors.themeBGColor + '; color: ' + $store.state.colors.themeColor
-          : $q.dark.isActive ? 'background-color: ' + $store.state.colors.darkThemeBGColor + '; color: ' + $store.state.colors.darkThemeColor
-            : 'background-color: ' + $store.state.colors.lightThemeBGColor + '; color: ' + $store.state.colors.lightThemeColor"
+      <div v-else
+        class="q-pa-xl fit row wrap justify-center items-start content-center"
+        :class="this.$route.fullPath.search(/\bios\b/) >= 0 ? '' : ''"
       >
-        <q-toolbar class="q-pa-lg">
-          <img class="footer-logo" :src="$q.dark.isActive ? require('../assets/your-trans-5.png') : require('../assets/your-trans-9.png')">
-          <q-space/>
-        </q-toolbar>
-      </q-footer> -->
+        <div class="col-auto text-center">
+          <img class="footer-logo" :src="require('../assets/your-design-trans-light.png')">
+            <div class="text-subtitle1"><strong>Criando um </strong><strong style="color: #a587ff;">único</strong>
+              <strong> produto, presente em todas as </strong><strong style="color: #a587ff;">plataformas.</strong></div>
+              <br>
+              <div class="text-weight-bolder text-h6">
+                Celulares / Tablets - iOS / Android
+              </div>
+              <div class="q-pb-none text-weight-bolder text-h6">
+                Computadores / Web - MacOS X / Windows
+              </div>
+              <q-tabs no-caps>
+                <q-route-tab icon="mdi-web" label="Web" to="/" />
+                <q-route-tab icon="mdi-apple-ios" label="iPhone" to="/ios" />
+                <q-route-tab icon="mdi-google-play" label="Android" to="/android" />
+                <q-route-tab icon="mdi-apple" label="Mac" to="/mac" />
+                <q-route-tab icon="mdi-microsoft" label="Windows" to="/windows" />
+              </q-tabs>
+              <DynamicCard/>
+            <div>
+          </div>
+        </div>
+      </div> -->
+       <!-- <FadeTransition mode="out-in"> -->
+         <!-- <div transition-show="jump-down"
+  transition-hide="jump-up"> -->
+   <!-- {{ tabVal }} -->
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
+         <!-- </div> -->
+
+       <!-- </FadeTransition> -->
+      <whatsapp/>
+      </q-page-container>
+      <q-footer
+      >
+        <!-- reveal -->
+        <!-- container
+        style="height: 250px" -->
+        <!-- :style="$q.dark.isActive ?
+          'background-color: ' + lightThemeBGColor + '; color: ' + lightThemeColor :
+          'background-color: ' + darkThemeBGColor + '; color: ' + darkThemeColor" -->
+        <!-- <q-toolbar class="q-pa-lg"> -->
+          <img class="footer-logo" :src="require('../assets/logo/your-design-trans.png')">
+          <!-- <q-space/> -->
+        <!-- </q-toolbar> -->
+      </q-footer>
     </q-layout>
   </div>
 </template>
@@ -388,46 +233,80 @@
 <script>
 import LeftDrawer from '../components/drawers/LeftDrawer'
 import RightDrawer from '../components/drawers/RightDrawer'
-import DynamicWhatsapp from '../components/whatsapp/DynamicWhatsapp'
-import DynamicThemeChange from '../components/whatsapp/DynamicThemeChange'
-// import WallE from '../components/animations/WallE'
+import whatsapp from '../components/whatsapp/Dynamicwhatsapp'
+// import FadeTransition from './FadeTransition.vue'
 
 export default {
   components: {
     LeftDrawer,
     RightDrawer,
-    DynamicWhatsapp,
-    DynamicThemeChange
-    // WallE
+    whatsapp
+    // FadeTransition
   },
   data () {
     return {
-      teste: true,
-      tabVal: 'yourprojects',
-      mainAreaVal: true,
+      headerTransitionVal: false,
+      headerTransitionVal2: false,
+      tabVal: false,
+      // headerTransition: false,
       left: false,
       right: false,
-      // showWallE: true,
-      ecoSystem: 'ios',
-      frameWebSiteVal: 'http://www.yourprojects.net/#',
-      dialog: false,
-      maximizedToggle: true
+      showWallE: true,
+      // darkThemeBGColor: '#000',
+      // darkThemeColor: '#f6f6f6',
+      // lightThemeBGColor: '#f6f6f6',
+      // lightThemeColor: '#000000',
+      palette: ['#FFFFFFFF', '#F2C037FF', '#21BA45FF', '#26A69AFF', '#31CCECFF', '#1976D2FF', '#e600e2ff', '#512fa9ff', '#aa0000ff', '#242424ff']
     }
   },
+  created () {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
+  // watch: {
+  //   headerTransition () {
+  //     this.headerTrans = true
+  //     // setTimeout(() => this.headerTransition = true, 500)
+  //     setTimeout(function () {
+  //       this.headerTrans = false
+  //     }, 1000)
+  //     // this.headerTransition()
+  //     // this.headerTransition = this.headerTransition
+  //     // setTimeout(() => this.headerTransition = true, 500)
+  //     // setTimeout(function () {
+  //     //   this.headerTransition()
+  //     // }, 1000)
+  //     // this.fullName = val + ' ' + this.lastName
+  //   }
+  //   // lastName: function (val) {
+  //   //   this.fullName = this.firstName + ' ' + val
+  //   // }
+  // },
   methods: {
-    keyboardEvent (e) {
-      if (e.which === 13) {
-        this.tabVal = 'oi'
-        // event.preventDefault()
-        alert('you didn t type +, did you?')
+    headerTab () {
+      this.tabVal = true
+      // setTimeout(this.tabVal = false, 3000)
+      // setTimeout(function () {
+      //   this.tabVal = false
+      // }, 1000)
+      // setTimeout(function () { this.tabVal = false }, 2000)
+    },
+    headerTransitionFunc (val) {
+      this.headerTransitionVal2 = val
+    //   // this.headerTransition = true
+    //   // // setTimeout(() => this.headerTransition = true, 500)
+    //   // setTimeout(function () {
+    //   //   this.headerTransition = false
+    //   // }, 1000)
+    },
+    handleScroll (event) {
+      if (window.scrollY > 25) {
+        this.headerTransition = true
+      } else if (window.scrollY < 25 && this.tabVal === false) {
+        this.headerTransition = false
       }
-    },
-    keyhandler (event) {
-      this.tabVal = 'oi'
-      alert('you didn t type +, did you?')
-    },
-    toggleZoomScreen () {
-      document.body.style.zoom = '100%'
     },
     dynamicRoute (val) {
       const about = 'about'
@@ -442,54 +321,30 @@ export default {
       } else {
         this.$router.push(val)
       }
-    },
-    beforeEnter: function (el) {
-      el.style.opacity = 0
-      el.style.transformOrigin = 'left'
-    },
-    enter: function (el, done) {
-      Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 }) // eslint-disable-line
-      Velocity(el, { fontSize: '1em' }, { complete: done }) // eslint-disable-line
-    },
-    leave: function (el, done) {
-      Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 }) // eslint-disable-line
-      Velocity(el, { rotateZ: '100deg' }, { loop: 2 }) // eslint-disable-line
-      Velocity(el, { // eslint-disable-line
-        rotateZ: '45deg',
-        translateY: '30px',
-        translateX: '30px',
-        opacity: 0
-      }, { complete: done })
     }
   },
   computed: {
-    mainArea: {
+    // headerTab: {
+    //   get () {
+    //     return this.tabVal
+    //   },
+    //   set () {
+    //     this.tabVal = true
+    //     setTimeout(function () { this.tabVal = false }, 2000)
+    //   }
+    // },
+    headerTransition: {
       get () {
-        return this.mainAreaVal
+        return this.headerTransitionVal
       },
       set (val) {
-        this.mainAreaVal = val
-        this.tab = 'yourprojects'
-      }
-    },
-    tab: {
-      get () {
-        return this.tabVal
-      },
-      set (val) {
-        this.tabVal = val
-      }
-    },
-    frameWebSite: {
-      get () {
-        if (this.frameWebSiteVal === 'http://www.yourprojects.net/#') {
-          return this.frameWebSiteVal + this.$route.fullPath
-        } else {
-          return this.frameWebSiteVal
-        }
-      },
-      set (val) {
-        this.frameWebSiteVal = val
+        this.headerTransitionVal = val
+        // this.headerTransitionVal2 = val
+        setTimeout(this.headerTransitionFunc(val), 20000)
+        // setTimeout(function () { this.headerTransitionVal2 = val }, 1000)
+        // setTimeout(function () {
+        //   // this.headerTransitionVal2 = !val
+        // }, 1000)
       }
     },
     returnStyle: {

@@ -78,6 +78,9 @@ animations:
 quasar:
 - https://techformist.com/using-vue-plugins-quasar/
 
+example templates:
+- https://colorlib.com/wp/parallax-website-templates/
+
 <!-- <q-icon class="text-grey-9" name="mdi-google-nearby"></q-icon> -->
 <!-- <q-icon class="text-grey-9" name="mdi-record"></q-icon> -->
 <!-- <q-space/> -->

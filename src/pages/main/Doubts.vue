@@ -10,7 +10,17 @@
                     <q-btn :class="{active:index ==2}" @click="moveTo(2)">Third page</q-btn>
                   </div> -->
                 <div class="fullpage-wp" v-fullpage="opts" ref="fullpage">
-                    <div class="page-1 page page-scroll" style="background-image: linear-gradient(purple, purple);">
+                    <div class="page-1 page page-scroll" style="background-image: linear-gradient(white, white);">
+                        <h1 class="part-1" v-animate="{value: 'bounceInLeft'}">YOUR PROJECTS </h1>
+                        <h2 v-animate="{value: 'bounceInLeft'}">scroll in pages</h2>
+                        <h3 class="" v-animate="{value: 'bounceInLeft'}">A sigle-page scroll plugin based on vue@2.x,support for mobile and PC .</h3>
+                    </div>
+                    <div class="page-1 page page-scroll" style="background-image: linear-gradient(white, white);">
+                        <h1 class="part-1" v-animate="{value: 'bounceInLeft'}">YOUR PROJECTS </h1>
+                        <h2 v-animate="{value: 'bounceInLeft'}">scroll in pages</h2>
+                        <h3 class="" v-animate="{value: 'bounceInLeft'}">A sigle-page scroll plugin based on vue@2.x,support for mobile and PC .</h3>
+                    </div>
+                    <div class="page-1 page page-scroll" style="background-image: linear-gradient(white, white);">
                         <h1 class="part-1" v-animate="{value: 'bounceInLeft'}">YOUR PROJECTS </h1>
                         <h2 v-animate="{value: 'bounceInLeft'}">scroll in pages</h2>
                         <h3 class="" v-animate="{value: 'bounceInLeft'}">A sigle-page scroll plugin based on vue@2.x,support for mobile and PC .</h3>
@@ -301,8 +311,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 * {
+    /* -webkit-overflow-scrolling: touch; */
     -webkit-overflow-scrolling: touch;
 }
 /* .fullpage-container {
@@ -349,7 +360,7 @@ export default {
     } */
 
     .fullpage-container {
-        position: absolute;
+        /* position: absolute; */
         /* padding: 0; */
         overflow: hidden;
         margin: 0;
@@ -362,10 +373,13 @@ export default {
     .page-scroll {
         padding-top: 100px;
         background-color: rgb(75, 191, 195);
-        overflow-y: scroll;
+        /* overflow-y: scroll; */
+        /* -webkit-overflow-scrolling: touch; */
+        /* overflow-y: touch; */
     }
     .page-scroll::-webkit-scrollbar {
       width: 0px;
+      /* -webkit-overflow-scrolling: touch; */
     }
 
     /* .page {

@@ -4,6 +4,18 @@
     class="fit transparent text-justify row wrap justify-center items-start"
   > -->
   <div class="transparent q-pt-xl">
+    <!-- <br>
+     <br>
+      <br>
+       <br>
+        <br>
+         <br>
+          <br>
+           <br>
+            <br>
+             <br>
+              <br>
+               <br> -->
     <!-- <div class="transparent q-pa-md text-justify row wrap justify-center items-start content-start"> -->
       <!-- <div class="q-pa-md col-xs-12 col-sm-6 col-md-4" style="max-width:415px"> -->
         <!-- 3d animation using pure CSS3 -->
@@ -13,63 +25,122 @@
         <br>
         <strong> presente em todas as</strong><strong style="color: #620fef;"> plataformas.</strong></small>
       </h1>
-      <div id="perspective3d" class="transparent text-justify row wrap justify-center items-start content-start">
-        <transition name="bounce" mode="out-in">
-        <div v-if="firstCard" class="card row q-pa-md col-xs-12 col-sm-12 col-md-12">
+      <lu id="movieposters" class="transparent q-pa-md text-justify row wrap justify-center items-start content-start">
+        <li class="row q-pa-md col-xs-12 col-sm-12 col-md-12">
+        <!-- <div class="col"> -->
           <div id="mac2-preview" class="platform-mac mat-only">
+            <!-- <iframe id="mac2-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/> -->
           </div>
-        </div>
-        </transition>
-        <div class="card row q-pa-md col-xs-12 col-sm-12 col-md-6">
+        <!-- </div> -->
+        </li>
+        <li class="row q-pa-md col-xs-12 col-sm-12 col-md-12">
+        <!-- <div class="col"> -->
+          <div id="mac3-preview" class="platform-mac mat-only">
+            <!-- <iframe id="mac2-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/> -->
+          </div>
+        <!-- </div> -->
+        </li>
+        <li class="row q-pa-md col-xs-12 col-sm-12 col-md-12">
         <div class="col">
           <div id="mac2-preview" class="platform-mac mat-only">
             <!-- <iframe id="mac2-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/> -->
           </div>
         </div>
-        </div>
-        <div class="card row q-pa-md col-xs-12 col-sm-12 col-md-6">
+        </li>
+        <li class="row q-pa-md col-xs-12 col-sm-12 col-md-12">
         <div class="col">
           <div id="mac3-preview" class="platform-mac mat-only">
+            <!-- <iframe id="mac2-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/> -->
           </div>
         </div>
-        </div>
-        <div class="q-pa-md col-xs-12 col-sm-12 col-md-6">
+        </li>
+        <li class="q-pa-md col-xs-12 col-sm-12 col-md-6">
+          <!-- <img src="../../assets/images/01_iron_man_2.jpg" alt="Iron Man 2" /> -->
         <div id="mac2-preview" class="platform-mac mat-only">
           <iframe id="mac2-iframe" frameborder="0" :src="'http://localhost:8080/#' + this.$route.fullPath"/>
+          <!-- <iframe>oi</iframe> -->
         </div>
+        </li>
+        <li class="q-pa-md col-xs-12 col-sm-6 col-md-4">
+          <img src="../../assets/images/01_iron_man_2.jpg" alt="Iron Man 2" />
+          <div class="movieinfo">
+            <h3>Iron Man 2</h3>
+            <p>With the world now aware of his dual divfe as the armored superhero Iron Man, bildivonaire inventor Tony...</p>
+            <a href="http://www.imdb.com/title/tt1228705/" title="Iron Man 2">More info</a>
+          </div>
+        </li>
+                <!-- </div> -->
+
+        <!-- <div class="q-pa-md col-xs-12 col-sm-6 col-md-4" style="max-width:415px"> -->
+        <li class="q-pa-md col-xs-12 col-sm-6 col-md-4">
+          <img src="../../assets/images/02_the_last_airbender.jpg" alt="The Last Airbender" />
+          <div class="movieinfo">
+            <h3>The Last Airbender</h3>
+            <p>The story follows the adventures of Aang, a young successor to a long divne of Avatars, who must put his...</p>
+            <a href="http://www.imdb.com/title/tt0938283/" title="Iron Man 2">More info</a>
+          </div>
+        </li>
+                <!-- </div> -->
+
+        <!-- <div class="q-pa-md col-xs-12 col-sm-6 col-md-4" style="max-width:415px"> -->
+        <li class="q-pa-md col-xs-12 col-sm-6 col-md-4">
+          <img src="../../assets/images/03_tron_legacy.jpg" alt="Tron Legacy" />
+          <div class="movieinfo">
+            <h3>Tron Legacy</h3>
+            <p>Sam Flynn, the tech-savvy 27-year-old son of Kevin Flynn, looks into his father's disappearance and finds...</p>
+            <a href="http://www.imdb.com/title/tt1104001/" title="Tron Legacy">More info</a>
+          </div>
+        </li>
+        <!-- </div> -->
+      </lu>
+    <!-- </div> -->
+    <!-- <h1>3d animation using pure CSS3<small>Movie Posters Example</small></h1>
+    <ul id="movieposters">
+      <li class="q-pa-md col-xs-12 col-sm-6 col-md-4">
+        <img src="../../assets/images/01_iron_man_2.jpg" alt="Iron Man 2" />
+        <div class="movieinfo">
+          <h3>Iron Man 2</h3>
+          <p>With the world now aware of his dual life as the armored superhero Iron Man, billionaire inventor Tony...</p>
+          <a href="http://www.imdb.com/title/tt1228705/" title="Iron Man 2">More info</a>
         </div>
-      </div>
+      </li>
+      <li class="q-pa-md col-xs-12 col-sm-6 col-md-4">
+        <img src="../../assets/images/02_the_last_airbender.jpg" alt="The Last Airbender" />
+        <div class="movieinfo">
+          <h3>The Last Airbender</h3>
+          <p>The story follows the adventures of Aang, a young successor to a long line of Avatars, who must put his...</p>
+          <a href="http://www.imdb.com/title/tt0938283/" title="Iron Man 2">More info</a>
+        </div>
+      </li>
+      <li class="q-pa-md col-xs-12 col-sm-6 col-md-4">
+        <img src="../../assets/images/03_tron_legacy.jpg" alt="Tron Legacy" />
+        <div class="movieinfo">
+          <h3>Tron Legacy</h3>
+          <p>Sam Flynn, the tech-savvy 27-year-old son of Kevin Flynn, looks into his father's disappearance and finds...</p>
+          <a href="http://www.imdb.com/title/tt1104001/" title="Tron Legacy">More info</a>
+        </div>
+      </li>
+    </ul> -->
+      <!-- </div>
+    </div> -->
+  <div style="heigth:800px">
   </div>
+  </div>
+  <!-- </div> -->
 </template>
 
 <script>
 export default {
   data () {
     return {
-      // crep: false
-      firstCard: true
-    }
-  },
-  created () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  destroyed () {
-    window.removeEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    handleScroll (event) {
-      if (window.scrollY > 290) {
-        this.firstCard = false
-      } else if (window.scrollY === 0) {
-        this.firstCard = true
-      }
+      crep: false
     }
   }
 }
 </script>
 
 <style scoped>
-#perspective3d .card #mac2-preview {
+#movieposters li #mac2-preview {
   border:1px solid #fff;
   -webkit-transform: rotateY(10deg);
   -moz-box-shadow:0 3px 10px #888;
@@ -78,7 +149,7 @@ export default {
   -webkit-transition-duration: 1s;
   /* margin: 0 0 18vw 0; */
 }
-#perspective3d .card:hover #mac2-preview {
+#movieposters li:hover #mac2-preview {
   -webkit-transform: rotateY(0deg);
   /* margin: 0 auto 0; */
 }
@@ -94,7 +165,7 @@ export default {
   /* margin: -25px auto 0; */
 }
 
-#perspective3d .card #mac3-preview {
+#movieposters li #mac3-preview {
   border:1px solid #fff;
   -webkit-transform: rotateY(-10deg);
   -moz-box-shadow:0 3px 10px #888;
@@ -103,7 +174,7 @@ export default {
   -webkit-transition-duration: 1s;
   /* margin: 0 0 18vw 0; */
 }
-#perspective3d .card:hover #mac3-preview {
+#movieposters li:hover #mac3-preview {
   -webkit-transform: rotateY(0deg);
   /* margin: 0 auto 0; */
 }
@@ -127,7 +198,7 @@ export default {
 } */
 
 /* BASIC RESET */
-ul,ol,li,.card,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input{margin:0; padding:0;}
+ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input{margin:0; padding:0;}
 
 /* HTML ELEMENTS */
 /* body { background-color:#deddcd; font:14px/21px Arial,Helvetica,sans-serif; } */
@@ -154,13 +225,13 @@ h2 a:hover { color: #90bcd0; } */
 }
 
 /* MOVIE POSTERS */
-#perspective3d {
+#movieposters {
   justify: center;
   list-style:none;
   margin:0 0;
   height:550px;
 }
-#perspective3d .card {
+#movieposters li {
   margin:100px 0;
   display:inline;
   float:left;
@@ -170,11 +241,11 @@ h2 a:hover { color: #90bcd0; } */
   -webkit-transition-duration: 0.5s;
 }
 
-#perspective3d .card:hover {
+#movieposters li:hover {
   /* -webkit-perspective: 5000; */
 }
 
-/* #perspective3d li img {
+/* #movieposters li img {
   border:10px solid #fcfafa;
   -webkit-transform: rotateY(30deg);
   -moz-box-shadow:0 3px 10px #888;
@@ -182,7 +253,7 @@ h2 a:hover { color: #90bcd0; } */
   -webkit-transition-property: transform;
   -webkit-transition-duration: 0.5s;
 }
-#perspective3d li:hover img {
+#movieposters li:hover img {
   -webkit-transform: rotateY(0deg);
 } */
 
@@ -200,7 +271,7 @@ h2 a:hover { color: #90bcd0; } */
   -webkit-transition-property: transform, box-shadow, margin;
   -webkit-transition-duration: 0.5s;
 }
-#perspective3d li:hover .movieinfo {
+#movieposters li:hover .movieinfo {
   -webkit-transform: rotateY(0deg);
   -webkit-box-shadow:0 5px 10px #888;
   margin:-175px 0 0 30px;
